@@ -1,20 +1,23 @@
 from django.shortcuts import render,redirect
-
-# Create your views here.
-# subject=[]
-# def index(request):
-#     if request.method=='POST':
-#             todo=render.POST['tudo']
-#             slno=len(subject)
-#             subject.append({'sl_no':slno+1,'tudo_sub':todo})
-#             l=len(subject)
-#     return render(request,'index.html',{'subject':subject})
-
-# def tudo_update(request,slno):
-#         for i in subject:
-#                 if i ['sl_no']==slno:
-#                         sub=i['tudo_sub']
-#                         print(sub)
-#         if request.method=='POST'
-#                 tudo_sub=request.POST['tudo']
-#                 for i in tudo_list                    
+subject=[]
+def index(request):
+    if request.method=='POST': 
+        l=len(subject)
+        slno=l+1
+        sub=request.POST['text']
+        subject.append({'slno':slno,'sub':sub})
+    return render(request,'index.html' ,{'subjects':subject})
+def todo_update(request,slno):
+    for i in subject:
+        if i['slno']==slno:
+            sub=i['sub']
+            # print(sub)
+    if request.method=='POST':
+        todo_sub=request.POST['todo']
+        print(todo_sub)
+        for i in subject:
+            if i['slno']==slno:
+                i['sub']=todo_sub
+                print(True)
+                return redirect(index)
+    return render(request,'todo_update.html',{'sub':sub,'slno':slno})
