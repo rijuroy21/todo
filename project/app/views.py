@@ -21,3 +21,17 @@ def todo_update(request,slno):
                 print(True)
                 return redirect(index)
     return render(request,'todo_update.html',{'sub':sub,'slno':slno})
+def todo_delete(request,slno):
+    for i in subject:
+        if i['slno']==slno:
+            sub=i['sub']
+            # print(sub)
+    if request.method=='POST':
+        todo_sub=request.POST['todo']
+        print(todo_sub)
+        for i in subject:
+            if i['slno']==slno:
+                subject.remove(i)
+                print(True)
+                return redirect(index)
+    return render(request,'todo_delete.html',{'sub':sub,'slno':slno})
